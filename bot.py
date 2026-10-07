@@ -1,4 +1,4 @@
-import logging
+import os
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
@@ -33,15 +33,16 @@ async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("<b>STATUS:</b> ACTIVE\n<b>OBJECTIVE:</b> TOTAL DOMINANCE", parse_mode="HTML")
 
 if __name__ == '__main__':
-    # ⚠️ PASTE YOUR BOTFATHER TOKEN FROM STEP 1 BETWEEN THE QUOTES BELOW ⚠️
-    TOKEN = "8912928860:AAH99XMXursDTAWMACsHjIaRFkrh9haKlek"
+    TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
     
     app = ApplicationBuilder().token(TOKEN).build()
     
-    # Register the commands with the bot
     app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("manifesto", manifesto))
-    app.add_handler(CommandHandler("status", status))
+    app.add_handler(CommandHandler("don", don))
+    app.add_handler(CommandHandler("background", background))
+    app.add_handler(CommandHandler("nova", nova))
+    app.add_handler(CommandHandler("directives", nova))
     
-    print("Bot is starting up...")
+    print("Nova Protocol core online...")
     app.run_polling()
+    
